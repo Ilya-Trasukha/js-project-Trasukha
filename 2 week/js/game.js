@@ -5,6 +5,10 @@ let game = {
   width: 0,
   height: 0,
   score: 0,
+  speed: 7,
+  level: 1,
+  lives: 3,
+  time: { start: performance.now(), elapsed: 0, refreshRate: 16}, 
   dimensions: {
     max: {
       width: 640,
@@ -19,7 +23,7 @@ let game = {
     background: null,
     ball: null,
     paddle: null,
-    block1: null
+    block: null
   },
   start() {
     this.init();
@@ -95,6 +99,7 @@ let game = {
     }, 150); 
   },
   create() {
+    // this.ball.resetBall();
   },
   update() {
     this.render();
@@ -103,6 +108,7 @@ let game = {
     window.requestAnimationFrame(() => {
       this.ctx.clearRect(0, 0, this.width, this.height);
       this.ctx.drawImage(this.sprites.background, 0, 0);
+      // this.ball.render();
       this.ctx.fillText('Score: ' + this.score, 30, 30)
     });
   },
