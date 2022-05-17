@@ -124,6 +124,8 @@ let game = {
   },
   create() {
     this.blocks.create();
+    this.ball.setBallPosition();
+    this.paddle.setPaddlePosition();
   },
   random(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -142,6 +144,8 @@ let game = {
       this.ctx.clearRect(0, 0, this.width, this.height);
       this.ctx.drawImage(this.sprites.background, (this.width - this.sprites.background.width) / 2, (this.height - this.sprites.background.height) / 2);
       this.blocks.render();
+      this.ball.render();
+      this.paddle.render();
       this.ctx.fillText(`SCORE: ${this.score}`, (this.width - this.sprites.background.width) / 2 + 20, (this.height - this.sprites.background.height) /2 + 16);
       this.ctx.fillText(`LIVES: ${this.lives}`,(this.width - this.sprites.background.width) / 2 + this.sprites.background.width - 98, (this.height - this.sprites.background.height) /2 + 16)
     }); 
