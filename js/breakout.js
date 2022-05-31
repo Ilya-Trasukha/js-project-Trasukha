@@ -228,13 +228,6 @@ function detectCollision() {
     ball.dy = -ball.dy;
     ball.y = canvas.height - paddle.height - 2 * ball.radius;
     sounds.paddle.play();
-    // TODO change this logic to angles with sin/cos
-    // Change x depending on where on the paddle the ball bounces.
-    // Bouncing ball more on one side draws ball a little to that side.
-    const drawingConst = 5
-    const paddleMiddle = 2;
-    const algo = (((ball.x - paddle.x) / paddle.width) * drawingConst);
-    ball.dx = ball.dx + algo - paddleMiddle;
   }
 }
 
@@ -268,7 +261,7 @@ function detectCollisionDirection(brick) {
 
   if (hitFromLeft() || hitFromRight()) {
     ball.dx = -ball.dx;
-  } else { // Hit from above or below
+  } else { 
     ball.dy = -ball.dy;
   }
 }
