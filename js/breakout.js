@@ -403,7 +403,7 @@ function checkHighScore(score) {
 function saveHighScore(score, highScores) {
   highScores.push(score);
   highScores.sort((a, b) => b.score - a.score);
-  highScores.splice(NO_OF_HIGH_SCORES);
+  highScores.splice(noOfHighScores);
   localStorage.setItem('highScores', JSON.stringify(highScores));
 }
 
