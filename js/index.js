@@ -16,23 +16,23 @@
     let PageHTML = "";
     switch (SPAStateH.pagename) {
       case 'main':
-        PageHTML += header.render();
-        PageHTML += menu.render();
+        PageHTML += new HeaderRenderer().render();
+        PageHTML += new MenuRenderer().render();
         break;
       case 'rules':
-        PageHTML += header.render();
-        PageHTML += rules.render();
+        PageHTML += new HeaderRenderer().render();
+        PageHTML += new RulesRenderer().render();
         break;
       case 'controls':
-        PageHTML += header.render();
-        PageHTML += controls.render();
+        PageHTML += new HeaderRenderer().render();
+        PageHTML += new ControlsRenderer().render();
         break;
       case 'about':
-        PageHTML += header.render();
-        PageHTML += about.render();
+        PageHTML += new HeaderRenderer().render();
+        PageHTML += new AboutRenderer().render();
         break;
       case 'play':
-        PageHTML += Game.render();
+        PageHTML += new GameRenderer().render();
         break;
     }
     spa.innerHTML = PageHTML;

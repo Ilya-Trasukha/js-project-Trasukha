@@ -6,41 +6,9 @@ document.addEventListener("mousemove", mouseMoveHandler);
 document.addEventListener("touchmove", touchMoveHandler);
 
 
-let game = {
-  requestId: null,
-  timeoutId: null,
-  leftKey: false,
-  rightKey: false,
-  on: false,
-  music: true
-}
-let paddle = {
-  height: 20,
-  width: 100,
-  get y() {
-    return canvas.height - this.height;
-  }
-}
-let ball = {
-  radius: 10
-}
-let brick = {
-  rows: 5,
-  cols: 10,
-  get width() {
-    return canvas.width / this.cols;
-  },
-  height: 30
-}
-let brickField = [];
-let images = {
-  background: new Image(),
-  ball: new Image(),
-  paddle: new Image()
-}
 const noOfHighScores = 10;
 
-function onImageLoad(e) {
+function onImageLoad() {
   resetGame();
   initBricks();
   resetPaddle();
@@ -48,7 +16,7 @@ function onImageLoad(e) {
   ctx.font = '50px ArcadeClassic';
   ctx.fillStyle = 'lime';
   ctx.fillText('PRESS SPACE/START', canvas.width / 2 - 170, canvas.height / 2);
-};
+}
 images.background.addEventListener('load', onImageLoad);
 images.background.src = './images/background.png';
 images.ball.src = './images/ball.png';
@@ -75,7 +43,7 @@ function play() {
   initBricks();
 
   sounds.breakout.play();
-  // Start music after starting sound ends.
+  
   setTimeout(() => game.music && sounds.music.play(), 2000);
 
   animate();
@@ -90,7 +58,7 @@ function resetGame() {
     start: performance.now(),
     elapsed: 0,
     refreshRate: 16
-  };
+  }
 }
 
 function initSounds() {
@@ -103,8 +71,8 @@ function initSounds() {
 function resetBall() {
   ball.x = canvas.width / 2;
   ball.y = canvas.height - paddle.height - 2 * ball.radius;
-  ball.dx = game.speed * (Math.random() * 2 - 1); // Random trajectory
-  ball.dy = -game.speed; // Up
+  ball.dx = game.speed * (Math.random() * 2 - 1); 
+  ball.dy = -game.speed; 
 }
 
 function resetPaddle() {
@@ -261,7 +229,7 @@ function detectCollisionDirection(brick) {
 
   if (hitFromLeft() || hitFromRight()) {
     ball.dx = -ball.dx;
-  } else { 
+  } else {
     ball.dy = -ball.dy;
   }
 }
@@ -369,6 +337,7 @@ function showHighScores() {
   const highScoreList = document.getElementById('highScores');
 
   highScoreList.innerHTML = highScores
+    .slice(0, 5)
     .map((score) => `<li>${score.score} - ${score.name}`)
     .join('');
 }
@@ -379,7 +348,7 @@ function checkHighScore(score) {
 
   if (score > lowestScore) {
     const name = prompt('You got a highscore! Enter name:');
-    if (name === null) {
+    if (!name) {
       showHighScores();
       return;
     } else {
